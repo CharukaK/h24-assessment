@@ -38,14 +38,16 @@ class ArticleList extends React.Component {
 
     xhr.send(JSON.stringify({
       query: `{
-        categories(ids: "156126", locale: de_DE) {
+        categories: productLists(ids: "156126", locale: de_DE) {
           name
           articleCount
-          childrenCategories {
-            name
-            urlPath
+          childrenCategories: childrenProductLists {
+            list {
+              name
+              urlPath
+            }
           }
-          categoryArticles(first: 50) {
+          categoryArticles: articlesList(first: 50) {
             articles {
               name
               variantName
@@ -55,12 +57,7 @@ class ArticleList extends React.Component {
                   value
                 }
               }
-              images(
-                format: WEBP
-                maxWidth: 200
-                maxHeight: 200
-                limit: 1
-              ) {
+              images(format: WEBP, maxWidth: 200, maxHeight: 200, limit: 1) {
                 path
               }
             }
