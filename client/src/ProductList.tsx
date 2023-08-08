@@ -1,10 +1,12 @@
 import React from 'react';
 
 import { Category, Article } from './types';
-
-
 import './ProductList.css';
 import './ProductList.css';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { Sidebar } from './components/Sidebar';
+import { ProductList } from './components/ProductList';
 
 var intlNumberFormatValues = ['de-DE', 'currency', 'EUR'];
 
@@ -13,34 +15,30 @@ export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
     currency: intlNumberFormatValues[2],
 });
 
-type State = {
-  categories: Category[];
-};
+// export var ArticleCard = ({ article }: { article: Article }) => {
+//     return (
+//         <div className={'article'}>
+//             <img src={article.images[0].path} />
+//             <div>{article.name}</div>
+//             <div>{formatter.format(article.prices.regular.value / 100)}</div>
+//             <section role="button">Add to cart</section>
+//         </div>
+//     )
+// };
+//
 
-export var ArticleCard = ({ article }: { article: Article }) => {
-    return (
-        <div className={'article'}>
-            <img src={article.images[0].path} />
-            <div>{article.name}</div>
-            <div>{formatter.format(article.prices.regular.value / 100)}</div>
-            <section role="button">Add to cart</section>
-        </div>
-    )
-};
+export function ArticleListComponent() {
+    const [categories, setCategories] = React.useState<Category[]>([]);
 
-class ArticleList extends React.Component {
-  state: State = {
-      categories: [],
-  };
+    React.useEffect(() => {
+        // TODO: Replace with Apolloclient
+        const xhr = new XMLHttpRequest();
 
-  componentDidMount() {
-      var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/graphql');
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
-      xhr.open('POST', '/graphql');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-
-      xhr.send(JSON.stringify({
-          query: `{
+        xhr.send(JSON.stringify({
+            query: `{
         categories: productLists(ids: "156126", locale: de_DE) {
           name
           articleCount
@@ -67,70 +65,31 @@ class ArticleList extends React.Component {
           }
         }
       }`,
-      }));
+        }));
 
-      xhr.onload = () => {
-          if (xhr.status === 200) {
-              var response = JSON.parse(xhr.response);
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.response);
 
-              this.setState({ categories: response.data.categories });
-          }
-      }
-  }
+                setCategories(response.data.categories);
+            }
+        }
 
-  render() {
-      var articles = this.state.categories.map((category) => {
-          return category.categoryArticles.articles.map((article) => {
-              return <ArticleCard article={article} />;
-          });
-      });
+    }, []);
 
-      return (
-          <div className={'page'}>
-              <div className={'header'}>
-                  <strong>home24</strong>
-                  <input placeholder={'Search'} />
-              </div>
-
-              <div className={'sidebar'}>
-                  <h3>Kategorien</h3>
-                  {this.state.categories.length ? (
-                      <ul>
-                          {this.state.categories[0].childrenCategories.list.map(({ name, urlPath }) => {
-                              return (
-                                  <li>
-                                      <a href={`/${urlPath}`}>{name}</a>
-                                  </li>
-                              );
-                          })}
-                      </ul>
-                  ) : (
-                      'Loading...'
-                  )}
-              </div>
-
-              <div className={'content'}>
-                  {this.state.categories.length ? (
-                      <h1>
-                          {this.state.categories[0].name}
-                          <small> ({this.state.categories[0].articleCount})</small>
-                      </h1>
-                  ) : (
-                      'Loading...'
-                  )}
-                  <div className={'articles'}>{articles}</div>
-              </div>
-
-              <div className={'footer'}>
-          Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und Versandkosten.
-              </div>
-          </div>
-      );
-  }
+    return (
+        <div className={'page'}>
+            <Header />
+            <Sidebar categories={categories} />
+            <ProductList categories={categories} />
+            <Footer />
+        </div>
+    );
 }
 
+
 var PLP = () => {
-    return <ArticleList />;
+    return <ArticleListComponent />;
 };
 
 export default PLP;

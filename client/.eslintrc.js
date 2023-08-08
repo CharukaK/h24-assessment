@@ -26,6 +26,7 @@ module.exports = {
     root: true, // For configuration cascading.
     rules: {
         "indent": ["error", 4],
+        "react/react-in-jsx-scope": "off",
     },
     settings: {
         react: {
