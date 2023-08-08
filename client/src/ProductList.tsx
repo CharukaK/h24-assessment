@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { Category, Article } from './types';
+
+
+import './ProductList.css';
 import './ProductList.css';
 
 var intlNumberFormatValues = ['de-DE', 'currency', 'EUR'];
@@ -93,7 +96,7 @@ class ArticleList extends React.Component {
                   <h3>Kategorien</h3>
                   {this.state.categories.length ? (
                       <ul>
-                          {this.state.categories[0].childrenCategories.map(({ name, urlPath }) => {
+                          {this.state.categories[0].childrenCategories.list.map(({ name, urlPath }) => {
                               return (
                                   <li>
                                       <a href={`/${urlPath}`}>{name}</a>

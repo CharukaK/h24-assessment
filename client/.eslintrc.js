@@ -20,7 +20,7 @@ module.exports = {
         sourceType: "module" // Allows for the use of imports
     },
     plugins: [
-        "import",
+        // "import",
         "react-hooks"
     ],
     root: true, // For configuration cascading.

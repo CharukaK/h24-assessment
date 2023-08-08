@@ -2,19 +2,18 @@ export type Category = {
   name: string
   categoryArticles: CategoryArticle
   articleCount: number
-  childrenCategories: ChildCategory[]
+  childrenCategories: ChildCategory
 }
 
 export type Article = {
-  name:  string
+  name: string
   variantName: string
   prices: Prices
   images: Image[]
 }
 
 export type ChildCategory = {
-  name: string
-  urlPath: string
+  list: { name: string, urlPath: string }[]
 }
 
 export type Prices = {
