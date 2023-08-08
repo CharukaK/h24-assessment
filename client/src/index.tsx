@@ -5,8 +5,8 @@ import './index.css';
 import ProductList from './ProductList';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ProductList />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <ProductList />
+    </React.StrictMode>,
+    document.getElementById('root')
 )
