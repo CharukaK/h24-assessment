@@ -1,6 +1,6 @@
 import React from "react";
 import { Category } from "../../types";
-import { ArticleCard } from "../ArticleCard";
+import { ProductCard } from "../ProductCard";
 
 interface ProductListProps {
     categories: Category[];
@@ -11,7 +11,7 @@ export function ProductList(props: ProductListProps) {
 
     const articles = categories.map((category) => {
         return category.categoryArticles.articles.map((article, i) => {
-            return <ArticleCard key={`${article.name.replaceAll(' ', '_').trim()}_${i}`} article={article} />;
+            return <ProductCard key={`${article.name.replaceAll(' ', '_').trim()}_${i}`} article={article} />;
         });
     });
 
