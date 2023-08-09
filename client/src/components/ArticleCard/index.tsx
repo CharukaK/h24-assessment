@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { Article } from "../../types";
-import { Card } from '../../ui-commons';
+import { Button, Card } from '../../ui-commons';
 
 interface ArticleCardProps {
     article: Article;
@@ -30,12 +30,13 @@ export function ArticleCard(props: ArticleCardProps) {
     const { article } = props;
 
     // TODO: fix intl for this component
+    // <section role="button">Add to cart</section>
     return (
         <Card>
             <ArticleImage src={article.images[0].path} alt={article.name} />
             <div>{article.name}</div>
             <div>{article.prices.regular.value / 100}</div>
-            <section role="button">Add to cart</section>
+            <Button>Add to cart</Button>
         </Card>
     )
 }
