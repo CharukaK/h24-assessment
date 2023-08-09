@@ -25,7 +25,7 @@ module.exports = {
     ],
     root: true, // For configuration cascading.
     rules: {
-        "indent": ["error", 4],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         "react/react-in-jsx-scope": "off",
     },
     settings: {
