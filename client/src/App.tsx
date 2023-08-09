@@ -1,19 +1,15 @@
 import React from 'react';
 
 import { Category } from './types';
-import './ProductList.css';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Sidebar } from './components/Sidebar';
 import { ProductList } from './components/ProductList';
 import styled from '@emotion/styled';
 
-var intlNumberFormatValues = ['de-DE', 'currency', 'EUR'];
 
-export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
-    style: intlNumberFormatValues[1],
-    currency: intlNumberFormatValues[2],
-});
+import './App.css';
+
 
 const PageContainer = styled.div`
     background-color: rgba(238, 238, 239, 1);

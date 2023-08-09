@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { Article } from "../../types";
-import { Button, Card, Title } from '../../ui-commons';
+import { Button, Card } from '../../ui-commons';
 import { currencyFormatter } from "../../util";
 
 interface ArticleCardProps {
