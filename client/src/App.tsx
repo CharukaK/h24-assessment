@@ -15,17 +15,6 @@ export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
     currency: intlNumberFormatValues[2],
 });
 
-// export var ArticleCard = ({ article }: { article: Article }) => {
-//     return (
-//         <div className={'article'}>
-//             <img src={article.images[0].path} />
-//             <div>{article.name}</div>
-//             <div>{formatter.format(article.prices.regular.value / 100)}</div>
-//             <section role="button">Add to cart</section>
-//         </div>
-//     )
-// };
-//
 
 export function ArticleListComponent() {
     const [categories, setCategories] = React.useState<Category[]>([]);
@@ -39,32 +28,32 @@ export function ArticleListComponent() {
 
         xhr.send(JSON.stringify({
             query: `{
-        categories: productLists(ids: "156126", locale: de_DE) {
-          name
-          articleCount
-          childrenCategories: childrenProductLists {
-            list {
-              name
-              urlPath
-            }
-          }
-          categoryArticles: articlesList(first: 50) {
-            articles {
-              name
-              variantName
-              prices {
-                currency
-                regular {
-                  value
+              categories: productLists(ids: "156126", locale: de_DE) {
+                name
+                articleCount
+                childrenCategories: childrenProductLists {
+                  list {
+                    name
+                    urlPath
+                  }
+                }
+                categoryArticles: articlesList(first: 50) {
+                  articles {
+                    name
+                    variantName
+                    prices {
+                      currency
+                      regular {
+                        value
+                      }
+                    }
+                    images(format: WEBP, maxWidth: 200, maxHeight: 200, limit: 1) {
+                      path
+                    }
+                  }
                 }
               }
-              images(format: WEBP, maxWidth: 200, maxHeight: 200, limit: 1) {
-                path
-              }
-            }
-          }
-        }
-      }`,
+            }`,
         }));
 
         xhr.onload = () => {
