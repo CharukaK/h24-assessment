@@ -13,9 +13,9 @@ export function Sidebar(props: SidebarProps) {
             {
                 categories.length ? (
                     <ul>
-                        {categories[0].childrenCategories.list.map(({ name, urlPath }) => {
+                        {categories[0].childrenCategories.list.map(({ name, urlPath }, i) => {
                             return (
-                                <li>
+                                <li key={`${name.replaceAll(' ', '_').trim()}_${i}`}>
                                     <a href={`/${urlPath}`}>{name}</a>
                                 </li>
                             );
