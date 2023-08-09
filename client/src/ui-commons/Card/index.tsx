@@ -16,7 +16,7 @@ const CardContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     border-radius: 5px;
-    padding: 16px;
+    padding: 16px;center
 `;
 
 
