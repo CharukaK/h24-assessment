@@ -12,6 +12,8 @@ const SideBarContainer = styled.div`
     background-color: #fff;
     max-height: 100vh;
     overflow-y: auto;
+    margin-left: 5px;
+    padding: 5px;
 `;
 
 const CategoryItem = styled.li`

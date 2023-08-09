@@ -15,12 +15,11 @@ const PageContainer = styled.div`
     background-color: rgba(238, 238, 239, 1);
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 160px auto auto;
+    grid-template-columns: 200px auto auto;
     grid-template-areas:
       'header header header'
       'sidebar content content'
       'footer footer footer';
-    margin: 6px;
 `;
 
 
