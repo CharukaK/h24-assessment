@@ -4,6 +4,7 @@ import { Category } from "../../types";
 
 interface SidebarProps {
     categories: Category[];
+    isLoading: boolean;
 }
 
 const SideBarContainer = styled.div`
@@ -28,25 +29,22 @@ const CategoryItem = styled.li`
 `;
 
 export function Sidebar(props: SidebarProps) {
-    const { categories } = props;
+    const { categories, isLoading } = props;
     return (
         <SideBarContainer className={'sidebar'}>
             <h3>Kategorien</h3>
-            {
-                categories.length ? (
-                    <ul>
-                        {categories[0].childrenCategories.list.map(({ name, urlPath }, i) => {
-                            return (
-                                <CategoryItem key={`${name.replaceAll(' ', '_').trim()}_${i}`}>
-                                    <a href={`/${urlPath}`}>{name}</a>
-                                </CategoryItem>
-                            );
-                        })}
-                    </ul>
-                ) : (
-                    'Loading...'
-                )
-            }
+            {isLoading && 'Loading...'}
+            {!isLoading && (
+                <ul>
+                    {categories[0].childrenCategories.list.map(({ name, urlPath }, i) => {
+                        return (
+                            <CategoryItem key={`${name.replaceAll(' ', '_').trim()}_${i}`}>
+                                <a href={`/${urlPath}`}>{name}</a>
+                            </CategoryItem>
+                        );
+                    })}
+                </ul>
+            )}
         </SideBarContainer>
     )
 }

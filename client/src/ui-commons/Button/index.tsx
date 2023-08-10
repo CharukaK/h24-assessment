@@ -16,7 +16,7 @@ const buttonStyles: SerializedStyles = css`
   cursor: pointer;
 `;
 
-const StyledButton = styled.button<ButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
   ${buttonStyles}
   background-color: ${props => props.backgroundColor || '#3498db'};
   color: ${props => props.textColor || '#ffffff'};

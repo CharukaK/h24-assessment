@@ -1,13 +1,38 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { Category } from "../../types";
 import { ProductCard } from "../ProductCard";
+import { Button, StyledButton } from "../../ui-commons";
 
 interface ProductListProps {
     categories: Category[];
+    isLoading: boolean;
 }
 
+const ContentContainer = styled.div`
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+`;
+
+const LoadMoreButton = styled(StyledButton)`
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-self: center;
+    background-color: #6e6e6e;
+`;
+
+const ProductListContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+    margin-bottom: 10px;
+`;
+
+
 export function ProductList(props: ProductListProps) {
-    const { categories } = props;
+    const { categories, isLoading } = props;
 
     const articles = categories.map((category) => {
         return category.categoryArticles.articles.map((article, i) => {
@@ -16,21 +41,19 @@ export function ProductList(props: ProductListProps) {
     });
 
     return (
-        <div className={'content'}>
-            {
-                categories.length ? (
-                    <h1>
-                        {categories[0].name}
-                        <small> ({categories[0].articleCount})</small>
-                    </h1>
-                ) : (
-                    'Loading...'
-                )
-            }
-            <div className={'articles'}>{articles}</div>
-        </div>
+        <ContentContainer>
+            {isLoading && 'Loading...'}
+            {!isLoading && (
+                <h1>
+                    {categories[0].name}
+                    <small> ({categories[0].articleCount})</small>
+                </h1>
+            )}
+            <ProductListContainer>
+                {articles}
+            </ProductListContainer>
+            <LoadMoreButton backgroundColor={'#6e6e6e'}>Load more</LoadMoreButton>
+        </ContentContainer>
     )
 }
-
-
 

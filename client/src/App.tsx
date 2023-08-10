@@ -28,16 +28,18 @@ export interface GetProductListsQuery {
 }
 
 export function ArticleListComponent() {
-    const [categories, setCategories] = React.useState<Category[]>([]);
-    const { data } = useQuery<GetProductListsQuery>(GET_PRODUCTS);
+    const { loading,data } = useQuery<GetProductListsQuery>(GET_PRODUCTS);
 
     // <div className={'page'}>
     // </div>
     return (
         <PageContainer>
             <Header />
-            <Sidebar categories={data?.categories || []} />
-            <ProductList categories={data?.categories || []} />
+            <Sidebar categories={data?.categories || []} isLoading={loading} />
+            <ProductList 
+                categories={data?.categories || []} 
+                isLoading={loading}
+            />
             <Footer />
         </PageContainer>
     );
