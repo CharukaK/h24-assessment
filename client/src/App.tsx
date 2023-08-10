@@ -7,7 +7,6 @@ import { Sidebar } from './components/Sidebar';
 import { ProductList } from './components/ProductList';
 import styled from '@emotion/styled';
 
-
 import './App.css';
 
 
@@ -25,7 +24,6 @@ const PageContainer = styled.div`
 
 export function ArticleListComponent() {
     const [categories, setCategories] = React.useState<Category[]>([]);
-
     React.useEffect(() => {
         // TODO: Replace with Apolloclient
         const xhr = new XMLHttpRequest();
