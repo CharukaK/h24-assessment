@@ -8,6 +8,8 @@ import { ProductList } from './components/ProductList';
 import styled from '@emotion/styled';
 
 import './App.css';
+import { GET_PRODUCTS } from './graphql/queries/get-products';
+import { useQuery } from '@apollo/client';
 
 
 const PageContainer = styled.div`
@@ -21,63 +23,21 @@ const PageContainer = styled.div`
       'footer footer footer';
 `;
 
+export interface GetProductListsQuery {
+    categories: Category[];
+}
 
 export function ArticleListComponent() {
     const [categories, setCategories] = React.useState<Category[]>([]);
-    React.useEffect(() => {
-        // TODO: Replace with Apolloclient
-        const xhr = new XMLHttpRequest();
-
-        xhr.open('POST', '/graphql');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        xhr.send(JSON.stringify({
-            query: `{
-              categories: productLists(ids: "156126", locale: de_DE) {
-                name
-                articleCount
-                childrenCategories: childrenProductLists {
-                  list {
-                    name
-                    urlPath
-                  }
-                }
-                categoryArticles: articlesList(first: 50) {
-                  articles {
-                    name
-                    variantName
-                    prices {
-                      currency
-                      regular {
-                        value
-                      }
-                    }
-                    images(format: WEBP, maxWidth: 200, maxHeight: 200, limit: 1) {
-                      path
-                    }
-                  }
-                }
-              }
-            }`,
-        }));
-
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.response);
-
-                setCategories(response.data.categories);
-            }
-        }
-
-    }, []);
+    const { data } = useQuery<GetProductListsQuery>(GET_PRODUCTS);
 
     // <div className={'page'}>
     // </div>
     return (
         <PageContainer>
             <Header />
-            <Sidebar categories={categories} />
-            <ProductList categories={categories} />
+            <Sidebar categories={data?.categories || []} />
+            <ProductList categories={data?.categories || []} />
             <Footer />
         </PageContainer>
     );

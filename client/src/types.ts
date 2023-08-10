@@ -30,3 +30,4 @@ export type Image = {
 export type CategoryArticle = {
   articles: Article[]
 }
+
