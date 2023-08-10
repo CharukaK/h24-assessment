@@ -7,6 +7,7 @@ import { Button, StyledButton } from "../../ui-commons";
 interface ProductListProps {
     categories: Category[];
     isLoading: boolean;
+    loadMore: () => void;
 }
 
 const ContentContainer = styled.div`
@@ -32,7 +33,7 @@ const ProductListContainer = styled.div`
 
 
 export function ProductList(props: ProductListProps) {
-    const { categories, isLoading } = props;
+    const { categories, isLoading, loadMore } = props;
 
     const articles = categories.map((category) => {
         return category.categoryArticles.articles.map((article, i) => {
@@ -52,7 +53,12 @@ export function ProductList(props: ProductListProps) {
             <ProductListContainer>
                 {articles}
             </ProductListContainer>
-            <LoadMoreButton backgroundColor={'#6e6e6e'}>Load more</LoadMoreButton>
+            <LoadMoreButton 
+                backgroundColor={'#6e6e6e'}
+                onClick={loadMore}
+            >
+                Load more
+            </LoadMoreButton>
         </ContentContainer>
     )
 }

@@ -10,6 +10,7 @@ import styled from '@emotion/styled';
 import './App.css';
 import { GET_PRODUCTS } from './graphql/queries/get-products';
 import { useQuery } from '@apollo/client';
+import { PRODUCTS_PER_PAGE } from './util/constants';
 
 
 const PageContainer = styled.div`
@@ -28,17 +29,41 @@ export interface GetProductListsQuery {
 }
 
 export function ArticleListComponent() {
-    const { loading,data } = useQuery<GetProductListsQuery>(GET_PRODUCTS);
+    const { loading, data, fetchMore } = useQuery<GetProductListsQuery>(GET_PRODUCTS, {
+        variables: {
+            offset: 0,
+            limit: PRODUCTS_PER_PAGE
+        }
+    });
 
     // <div className={'page'}>
     // </div>
+    //
+    const handleLoadMore = () => {
+        fetchMore({
+            variables: {
+                offset: data?.categories.length || 0,
+                limit: PRODUCTS_PER_PAGE
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) return prev;
+                return {
+                    categories: [
+                        ...prev.categories,
+                        ...fetchMoreResult.categories
+                    ]
+                };
+            }
+        });
+    };
     return (
         <PageContainer>
             <Header />
             <Sidebar categories={data?.categories || []} isLoading={loading} />
-            <ProductList 
-                categories={data?.categories || []} 
+            <ProductList
+                categories={data?.categories || []}
                 isLoading={loading}
+                loadMore={handleLoadMore}
             />
             <Footer />
         </PageContainer>
