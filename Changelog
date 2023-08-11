@@ -1,0 +1,27 @@
+[33m8c79613[m Initial commit
+[33m5549d08[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Project init
+[33m21aa187[m Fix graphQL query used
+[33m31d9651[m Add eslint setup configurations
+[33ma012caa[m Fix lint issues
+[33ma7535c1[m Bump typescript version to 4.3.5
+[33maf9f041[m Seperate logical reusable components
+[33m077185a[m Integrate lint check to build
+[33m938a8ea[m Add key prop to elements created from lists
+[33m4ab843f[m Rename main ProductList component as App
+[33md5df9fe[m Add alt text to images shown
+[33m200a572[m Add emotion styles and Add card Component
+[33mcc82922[m Add Generic Button component
+[33m1e79703[m Rename ArticleCard as ProductCard
+[33m62dc0ac[m Add emotion-css package
+[33m39f17d1[m Fix eslint indent for switch case
+[33ma0c22dd[m Update ui-components
+[33me926e26[m Improve side bar styling
+[33mc2b87dd[m Update Todo list
+[33ma3d352a[m Fix Side bar styling
+[33mb102469[m Fix Header Styling
+[33mbded1b9[m Fix Footer styling
+[33mea4f7db[m Add apollo client to the project
+[33m5f5e394[m Integrate Apollo client for data fetching
+[33ma35648c[m Add load more button to product list page
+[33mabc7aa1[m[33m ([m[1;31morigin/dev[m[33m)[m Add Loadmore button functionality
+[33m754e2ea[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m Update todo
