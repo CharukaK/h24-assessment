@@ -3,6 +3,7 @@
 - [ ] Fix the filtering of the search bar
 - [x] Add pagination to the product list
 - [ ] finish test setup
-- [ ] fix load more merging of categories
+- [x] fix load more merging of categories
 - [ ] Add media query for large viewports
+- [x] Add media query for smaller viewports
 - [ ] Add media query for mobile screen sizes
