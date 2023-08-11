@@ -22,6 +22,14 @@ const PageContainer = styled.div`
       'header header header'
       'sidebar content content'
       'footer footer footer';
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'header'
+            'content'
+            'footer'
+    }
 `;
 
 export interface GetProductListsQuery {
@@ -36,34 +44,69 @@ export function ArticleListComponent() {
         }
     });
 
-    // <div className={'page'}>
-    // </div>
-    //
+    const [showSidebar, setShowSidebar] = React.useState(false);
+    React.useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)'); // Adjust the screen size as needed
+
+        const handleScreenChange = (event: MediaQueryListEvent) => {
+            setShowSidebar(!event.matches);
+        };
+
+        mediaQuery.addListener(handleScreenChange);
+
+        mediaQuery.dispatchEvent(new MediaQueryListEvent('change'));
+
+        return () => {
+            mediaQuery.removeListener(handleScreenChange);
+        };
+    }, []);
+
     const handleLoadMore = () => {
+        console.log(data?.categories[0].categoryArticles.articles.length || 0)
         fetchMore({
             variables: {
-                offset: data?.categories.length || 0,
+                offset: data?.categories[0].categoryArticles.articles.length || 0,
                 limit: PRODUCTS_PER_PAGE
             },
             updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult) return prev;
-                return {
+                const categoryResult = {
+                    ...prev.categories[0],
+                    categoryArticles: {
+                        articles: [
+                            ...prev.categories[0].categoryArticles.articles,
+                            ...fetchMoreResult.categories[0].categoryArticles.articles
+                        ]
+                    }
+                }
+                const result = {
                     categories: [
-                        ...prev.categories,
-                        ...fetchMoreResult.categories
+                        categoryResult
                     ]
-                };
+                }
+                return result;
             }
         });
     };
+
+    const toggleSidebar = () => {
+        setShowSidebar(!showSidebar);
+    }
+
     return (
         <PageContainer>
             <Header />
-            <Sidebar categories={data?.categories || []} isLoading={loading} />
+            <Sidebar
+                categories={data?.categories || []}
+                isLoading={loading}
+                isOpen={showSidebar}
+                toggleSidebar={toggleSidebar}
+            />
             <ProductList
                 categories={data?.categories || []}
                 isLoading={loading}
                 loadMore={handleLoadMore}
+                toggleSidebar={toggleSidebar}
             />
             <Footer />
         </PageContainer>

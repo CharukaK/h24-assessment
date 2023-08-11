@@ -2,12 +2,15 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Category } from "../../types";
 import { ProductCard } from "../ProductCard";
-import { Button, StyledButton } from "../../ui-commons";
+import { StyledButton } from "../../ui-commons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 interface ProductListProps {
     categories: Category[];
     isLoading: boolean;
     loadMore: () => void;
+    toggleSidebar: () => void;
 }
 
 const ContentContainer = styled.div`
@@ -15,6 +18,10 @@ const ContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-right: 5px;
+
+    @media (max-width: 768px) {
+        margin: 20px;
+    }
 `;
 
 const LoadMoreButton = styled(StyledButton)`
@@ -29,11 +36,37 @@ const ProductListContainer = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 10px;
     margin-bottom: 10px;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
+const CategoryTitleContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const ShowSidebarButton = styled.div`
+    position: relative;
+    top: 0;
+    background-color: transparent;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #5b5e61;
+    outline: none;
+    display: none;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
+`
 
 export function ProductList(props: ProductListProps) {
-    const { categories, isLoading, loadMore } = props;
+    const { categories, isLoading, loadMore, toggleSidebar } = props;
 
     const articles = categories.map((category) => {
         return category.categoryArticles.articles.map((article, i) => {
@@ -45,15 +78,20 @@ export function ProductList(props: ProductListProps) {
         <ContentContainer>
             {isLoading && 'Loading...'}
             {!isLoading && (
-                <h1>
-                    {categories[0].name}
-                    <small> ({categories[0].articleCount})</small>
-                </h1>
+                <CategoryTitleContainer >
+                    <ShowSidebarButton onClick={toggleSidebar}>
+                        <FontAwesomeIcon icon={faBars} />
+                    </ShowSidebarButton>
+                    <h1>
+                        {categories[0].name}
+                        <small> ({categories[0].articleCount})</small>
+                    </h1>
+                </CategoryTitleContainer>
             )}
             <ProductListContainer>
                 {articles}
             </ProductListContainer>
-            <LoadMoreButton 
+            <LoadMoreButton
                 backgroundColor={'#6e6e6e'}
                 onClick={loadMore}
             >
