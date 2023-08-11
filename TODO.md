@@ -1,4 +1,8 @@
 - [ ] Setup eslint plugin for jest and react-test library
-- [ ] Change the XMLHttpRequest of Graphql call to use Apollo client?
+- [x] Change the XMLHttpRequest of Graphql call to use Apollo client?
 - [ ] Fix the filtering of the search bar
-- [ ] Add pagination to the product list
+- [x] Add pagination to the product list
+- [ ] finish test setup
+- [ ] fix load more merging of categories
+- [ ] Add media query for large viewports
+- [ ] Add media query for mobile screen sizes
