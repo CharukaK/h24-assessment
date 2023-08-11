@@ -2,7 +2,7 @@
 - [x] Change the XMLHttpRequest of Graphql call to use Apollo client?
 - [ ] Fix the filtering of the search bar
 - [x] Add pagination to the product list
-- [ ] finish test setup
+- [x] finish test setup
 - [x] fix load more merging of categories
 - [ ] Add media query for large viewports
 - [x] Add media query for smaller viewports
