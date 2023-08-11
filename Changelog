@@ -1,5 +1,3 @@
-[33m8c79613[m Initial commit
-[33m5549d08[m Project init
 [33m21aa187[m Fix graphQL query used
 [33m31d9651[m Add eslint setup configurations
 [33ma012caa[m Fix lint issues
@@ -16,7 +14,6 @@
 [33m39f17d1[m Fix eslint indent for switch case
 [33ma0c22dd[m Update ui-components
 [33me926e26[m Improve side bar styling
-[33mc2b87dd[m Update Todo list
 [33ma3d352a[m Fix Side bar styling
 [33mb102469[m Fix Header Styling
 [33mbded1b9[m Fix Footer styling
@@ -24,6 +21,5 @@
 [33m5f5e394[m Integrate Apollo client for data fetching
 [33ma35648c[m Add load more button to product list page
 [33mabc7aa1[m Add Loadmore button functionality
-[33m754e2ea[m Update todo
-[33mfe95aef[m Update changelog
 [33m1bbae1b[m Make the side bar and content view responsive
+[33m9aab366[m Add unit tests
