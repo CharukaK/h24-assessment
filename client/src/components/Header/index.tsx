@@ -23,9 +23,7 @@ const HeaderContainer = styled.div`
         padding: 0 10px;
     }
 `;
-// <div className={'header'}>
-//
-// </div>
+
 export function Header() {
     return (
         <HeaderContainer>

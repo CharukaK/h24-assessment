@@ -22,7 +22,7 @@ const CardContainer = styled.div`
 
 export function Card(props: PropsWithChildren<CardProps>) {
     return (
-        <CardContainer backgroundColor={props.backgroundColor}>
+        <CardContainer data-testid="card-containter" backgroundColor={props.backgroundColor}>
             {props.children}
         </CardContainer>
     );
